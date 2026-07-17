@@ -10,7 +10,7 @@ function Badge({ className, children, ...props }: BadgeProps) {
       )}
       {...props}
     >
-      <span className="mr-2 h-2 w-2 rounded-full bg-status-green animate-pulse-dot animate-neon-flicker shrink-0 mb-[1px]" />
+      <span className="mr-2 h-2 w-2 rounded-full bg-status-green animate-pulse-dot shrink-0 mb-[1px]" />
       <span className="mt-[1px]">{children}</span>
     </div>
   )
