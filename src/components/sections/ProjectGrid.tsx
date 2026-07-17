@@ -15,7 +15,7 @@ export function ProjectGrid() {
 
   return (
     <section id="projects" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
-      <div className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary text-center md:text-left">
           {t("Projects.title")}
         </h2>
@@ -68,7 +68,7 @@ export function ProjectGrid() {
         {/* View All Projects Card */}
         <div
           className={cn(
-            "group flex flex-col overflow-hidden rounded-xl border border-dashed border-border-subtle bg-transparent transition-all hover:-translate-y-1 hover:border-accent-cyan hover:shadow-[0_0_20px_rgba(129,243,229,0.1)]",
+            "group relative z-10 flex flex-col overflow-hidden rounded-xl border border-dashed border-border-subtle bg-transparent transition-all hover:-translate-y-1 hover:border-accent-cyan hover:shadow-[0_0_20px_rgba(129,243,229,0.1)]",
             viewMode === "carousel" && "shrink-0 w-80 md:w-[400px] snap-center h-auto",
             viewMode === "grid" && "min-h-[300px]",
             viewMode === "list" && "py-12"

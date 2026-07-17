@@ -22,6 +22,18 @@ interface NoteData {
   fontSize: number;
 }
 
+const generateNotes = (useNegativeDelay: boolean, count: number) => {
+  return Array.from({ length: count }).map(() => ({
+    id: Math.random(),
+    char: NOTES[Math.floor(Math.random() * NOTES.length)],
+    left: `${Math.random() * 100}%`,
+    animationDelay: useNegativeDelay ? `-${Math.random() * 30}s` : `${Math.random() * 3}s`,
+    animationDuration: `${Math.random() * 15 + 15}s`,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    fontSize: Math.random() * 16 + 20,
+  })) as NoteData[];
+};
+
 export function MusicalNotesBackground() {
   const [notes, setNotes] = useState<NoteData[]>([]);
   const [isLitUp, setIsLitUp] = useState(false);
@@ -30,19 +42,7 @@ export function MusicalNotesBackground() {
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    const generateNotes = (count: number) => {
-      return Array.from({ length: count }).map(() => ({
-        id: Math.random(),
-        char: NOTES[Math.floor(Math.random() * NOTES.length)],
-        left: `${Math.random() * 100}%`,
-        animationDelay: `-${Math.random() * 30}s`, // Start at random progress
-        animationDuration: `${Math.random() * 15 + 15}s`, // 15s to 30s to fall
-        color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        fontSize: Math.random() * 16 + 20, // 20px to 36px
-      })) as NoteData[];
-    };
-
-    setNotes(generateNotes(40));
+    setNotes(generateNotes(true, 40));
   }, []);
 
   useEffect(() => {
@@ -57,6 +57,7 @@ export function MusicalNotesBackground() {
       
       const duration = theme === "light" ? 4500 : 3000;
       const timer = setTimeout(() => {
+        setNotes(generateNotes(false, 40));
         setIsHidden(false);
       }, duration);
       
@@ -68,7 +69,7 @@ export function MusicalNotesBackground() {
 
   return (
     <>
-      <div className="fixed inset-0 pointer-events-none z-[-1] hidden lg:block overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none z-0 hidden lg:block overflow-hidden">
         {notes.map((note) => (
           <div
             key={note.id}

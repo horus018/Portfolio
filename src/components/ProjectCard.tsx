@@ -23,7 +23,7 @@ export function ProjectCard({ project, isList = false }: ProjectCardProps) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-      "group flex overflow-hidden rounded-xl border border-border-subtle bg-surface transition-all hover:-translate-y-1 hover:shadow-2xl h-full cursor-pointer",
+      "group relative z-10 flex overflow-hidden rounded-xl border border-border-subtle bg-surface transition-all hover:-translate-y-1 hover:shadow-2xl h-full cursor-pointer",
       isList ? "flex-col md:flex-row" : "flex-col"
     )}>
       <div className={cn(

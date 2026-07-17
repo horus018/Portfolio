@@ -11,7 +11,7 @@ export function ExperienceGrid() {
   return (
     <section id="experience" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
       <ScrollReveal delay={0.1}>
-        <div className="mb-16">
+        <div className="mb-16 relative z-10">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary text-center">
             {t("Experience.title") || "Experiência"}
           </h2>

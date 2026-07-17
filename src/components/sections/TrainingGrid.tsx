@@ -14,7 +14,7 @@ export function TrainingGrid() {
 
   return (
     <section id="trainings" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
-      <div className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary text-center md:text-left">
           {t("Trainings.title") || "Treinamentos & Apresentações"}
         </h2>

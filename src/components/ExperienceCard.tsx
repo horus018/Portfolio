@@ -20,8 +20,8 @@ export function ExperienceCard({ experience, isLast = false }: ExperienceCardPro
   const achievements = experience.achievements[language]
 
   return (
-    <div className="relative pl-8 md:pl-0">
-      {/* Mobile timeline line */}
+    <div className="relative z-10 pl-8 md:pl-0 group pointer-events-auto">
+      {/* Timeline track */}
       <div className="md:hidden absolute left-0 top-0 bottom-0 w-px bg-border-subtle" />
       {!isLast && (
         <div className="md:hidden absolute left-0 top-14 bottom-[-2rem] w-px bg-border-subtle" />
