@@ -1,13 +1,11 @@
 "use client"
 import * as React from "react"
 import { motion, HTMLMotionProps } from "framer-motion"
-
 interface BentoCardProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode
   className?: string
   noPadding?: boolean
 }
-
 export function BentoCard({ children, className = "", noPadding = false, ...props }: BentoCardProps) {
   return (
     <motion.div

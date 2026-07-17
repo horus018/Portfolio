@@ -1,10 +1,8 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-
 interface SocialIconProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   icon: React.ReactNode;
 }
-
 export function SocialIcon({ className, icon, ...props }: SocialIconProps) {
   return (
     <a

@@ -1,12 +1,8 @@
 "use client";
-
 import { useReducedMotion } from "framer-motion";
-
 export function CircuitBackground() {
   const prefersReducedMotion = useReducedMotion();
-
   if (prefersReducedMotion) return null;
-
   return (
     <div className="fixed inset-0 pointer-events-none z-[-1] opacity-5 dark:opacity-[0.03]">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">

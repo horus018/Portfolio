@@ -1,12 +1,8 @@
 "use client";
-
 import { useReducedMotion } from "framer-motion";
-
 export function Scanlines() {
   const prefersReducedMotion = useReducedMotion();
-
   if (prefersReducedMotion) return null;
-
   return (
     <div
       className="pointer-events-none fixed inset-0 z-10"

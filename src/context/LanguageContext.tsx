@@ -1,40 +1,32 @@
 "use client";
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 import enMessages from "../messages/en.json";
 import ptMessages from "../messages/pt.json";
-
 type Language = "en" | "pt";
-
 type LanguageContextType = {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string, replacements?: Record<string, string>) => string;
 };
-
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
 const messages: Record<Language, any> = {
   en: enMessages,
   pt: ptMessages,
 };
-
 function getNestedValue(obj: any, path: string): string {
   const keys = path.split(".");
   let current = obj;
   for (const key of keys) {
     if (current === undefined || current[key] === undefined) {
-      return path; // Return the path if the key is not found
+      return path; 
     }
     current = current[key];
   }
   return typeof current === "string" ? current : path;
 }
-
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     setMounted(true);
     const storedLang = localStorage.getItem("language") as Language;
@@ -44,14 +36,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       setLanguageState("pt");
     }
   }, []);
-
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("language", lang);
   };
-
   const t = (key: string, replacements?: Record<string, string>) => {
-    // During SSR, we use the default "en" language, then after mount, it'll update to correct language.
     const activeLanguage = mounted ? language : "en";
     let text = getNestedValue(messages[activeLanguage], key);
     if (replacements) {
@@ -61,14 +50,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
     return text;
   };
-
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
 }
-
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {

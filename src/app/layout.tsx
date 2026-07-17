@@ -4,22 +4,18 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { Scanlines } from "@/components/effects/Scanlines";
 import "./globals.css";
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
-
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
-
 export const metadata: Metadata = {
   title: "Lucas Rubira | Software Developer",
   description: "Personal portfolio of Lucas Rubira, Software Developer focused on Ruby on Rails and React.",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

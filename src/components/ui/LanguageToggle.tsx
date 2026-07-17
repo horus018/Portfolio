@@ -2,15 +2,12 @@
 import * as React from "react"
 import { Globe } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
-
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage()
-
   const toggleLocale = () => {
     const nextLocale = language === "en" ? "pt" : "en"
     setLanguage(nextLocale)
   }
-
   return (
     <button
       onClick={toggleLocale}

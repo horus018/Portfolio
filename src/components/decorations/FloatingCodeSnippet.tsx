@@ -2,15 +2,12 @@
 import * as React from "react"
 import { motion, HTMLMotionProps, useReducedMotion } from "framer-motion"
 import { cn } from "@/lib/utils"
-
 interface FloatingCodeSnippetProps extends HTMLMotionProps<"div"> {
   code: React.ReactNode;
   delay?: number;
 }
-
 export function FloatingCodeSnippet({ className, code, delay = 0, ...props }: FloatingCodeSnippetProps) {
   const prefersReducedMotion = useReducedMotion();
-
   return (
     <motion.div
       initial={{ y: 0 }}
