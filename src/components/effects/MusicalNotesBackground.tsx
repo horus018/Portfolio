@@ -27,7 +27,7 @@ const generateNotes = (useNegativeDelay: boolean, count: number) => {
     id: Math.random(),
     char: NOTES[Math.floor(Math.random() * NOTES.length)],
     left: `${Math.random() * 100}%`,
-    animationDelay: useNegativeDelay ? `-${Math.random() * 30}s` : `${Math.random() * 3}s`,
+    animationDelay: useNegativeDelay ? `-${Math.random() * 30}s` : `${Math.random() * 1.5}s`,
     animationDuration: `${Math.random() * 15 + 15}s`,
     color: COLORS[Math.floor(Math.random() * COLORS.length)],
     fontSize: Math.random() * 16 + 20,
@@ -52,16 +52,20 @@ export function MusicalNotesBackground() {
       return;
     }
     if (theme !== prevTheme.current) {
-      setIsHidden(true);
       prevTheme.current = theme;
       
-      const duration = theme === "light" ? 4500 : 3000;
-      const timer = setTimeout(() => {
+      if (theme === "dark") {
+        // Fall immediately without hiding
         setNotes(generateNotes(false, 40));
-        setIsHidden(false);
-      }, duration);
-      
-      return () => clearTimeout(timer);
+      } else {
+        // Wait a short moment for Caraxes to appear
+        setIsHidden(true);
+        const timer = setTimeout(() => {
+          setNotes(generateNotes(false, 40));
+          setIsHidden(false);
+        }, 500);
+        return () => clearTimeout(timer);
+      }
     }
   }, [theme]);
 
