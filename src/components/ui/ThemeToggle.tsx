@@ -30,6 +30,7 @@ export function ThemeToggle() {
         }, 700)
       }, 1500)
     } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       setIsTransitioning(true)
       setShowCaraxes(true)
       setTimeout(() => {
