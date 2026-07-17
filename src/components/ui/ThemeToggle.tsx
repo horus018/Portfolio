@@ -31,6 +31,7 @@ export function ThemeToggle() {
       }, 1500)
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' })
+      document.body.style.overflow = 'hidden'
       setIsTransitioning(true)
       setShowCaraxes(true)
       setTimeout(() => {
@@ -42,6 +43,7 @@ export function ThemeToggle() {
           setTheme("light")
           window.dispatchEvent(new CustomEvent('caraxes-transition', { detail: { state: 'restore' } }))
           setIsTransitioning(false)
+          document.body.style.overflow = ''
         }, 2000)
       }, 600)
     }
