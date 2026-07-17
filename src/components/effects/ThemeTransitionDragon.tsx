@@ -2,16 +2,13 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useReducedMotion } from "framer-motion";
 export function ThemeTransitionDragon() {
   const { theme } = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTheme, setCurrentTheme] = useState(theme);
-  const prefersReducedMotion = useReducedMotion();
   const isSwitchingToLight = theme === "light";
   const durationMs = isSwitchingToLight ? 4500 : 3000;
   useEffect(() => {
-    if (prefersReducedMotion) return;
     if (theme && currentTheme !== theme) {
       setCurrentTheme(theme);
       setIsPlaying(true);
@@ -20,7 +17,7 @@ export function ThemeTransitionDragon() {
       }, durationMs);
       return () => clearTimeout(timer);
     }
-  }, [theme, currentTheme, prefersReducedMotion, durationMs]);
+  }, [theme, currentTheme, durationMs]);
   if (!isPlaying) return null;
   const gifSrc = isSwitchingToLight ? "/dragon_flying.gif" : "/haunter.gif";
   const blendMode = isSwitchingToLight ? "mix-blend-multiply" : "mix-blend-screen";
