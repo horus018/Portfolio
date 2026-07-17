@@ -1,0 +1,21 @@
+{
+  "Nav": {
+    "about": "About",
+    "projects": "Projects"
+  },
+  "Hero": {
+    "status": "Status: Coding / Gaming",
+    "role": "Software Developer focused on <ruby>Ruby on Rails</ruby> and <react>React</react>.",
+    "description": "Crafting robust backends and dynamic user interfaces. When I'm not building applications, I'm probably managing a base in Clash of Clans or surviving in Project Zomboid.",
+    "viewProjects": "View Projects",
+    "contactMe": "Contact Me",
+    "certificates": "Certificates"
+  },
+  "Projects": {
+    "title": "Featured Projects",
+    "github": "<> GitHub"
+  },
+  "Footer": {
+    "copyright": "© {year} Lucas Rubira • Built with love"
+  }
+}
