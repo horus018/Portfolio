@@ -15,7 +15,7 @@ export function LanguageToggle() {
       aria-label="Toggle language"
     >
       <Globe className="h-4 w-4" />
-      <span className="mt-2">{language.toUpperCase()}</span>
+      <span className="mt-1">{language.toUpperCase()}</span>
     </button>
   )
 }
