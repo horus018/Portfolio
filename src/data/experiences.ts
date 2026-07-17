@@ -14,8 +14,8 @@ export const experiences: Experience[] = [
   {
     id: "exp-6",
     title: {
-      en: "Ruby on Rails Engineer",
-      pt: "Engenheiro Ruby on Rails"
+      en: "Ruby on Rails Developer",
+      pt: "Desenvolvedor Ruby on Rails"
     },
     company: "Desys Finance",
     type: {
@@ -50,8 +50,8 @@ export const experiences: Experience[] = [
   {
     id: "exp-5",
     title: {
-      en: "Java Software Engineer",
-      pt: "Engenheiro de Software Java"
+      en: "Java Developer",
+      pt: "Desenvolvedor Java"
     },
     company: "Universidade Tecnológica Federal do Paraná",
     type: {
@@ -82,8 +82,8 @@ export const experiences: Experience[] = [
   {
     id: "exp-4",
     title: {
-      en: "Ruby on Rails Engineer",
-      pt: "Engenheiro Ruby on Rails"
+      en: "Ruby on Rails Developer",
+      pt: "Desenvolvedor Ruby on Rails"
     },
     company: "Santé Odonto",
     type: {

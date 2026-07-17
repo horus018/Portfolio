@@ -61,15 +61,18 @@ export function Hero() {
   }, [])
   const isBurning = caraxesState === 'burning'
   const burningClasses = "fire-burn-out"
-  const illuminatedClasses = "shadow-[0_0_60px_rgba(255,69,0,0.4)] border-orange-500/50 blur-[1px] brightness-110 saturate-150 transition-all duration-1000 ease-out"
-  const blast1 = `${illuminatedClasses} translate-x-[20vw] -translate-y-[10vh] rotate-[15deg] scale-90`
-  const blast2 = `${illuminatedClasses} translate-x-[35vw] translate-y-[5vh] rotate-[25deg] scale-110`
-  const blast3 = `${illuminatedClasses} translate-x-[15vw] translate-y-[15vh] -rotate-[15deg] scale-95`
-  const blast4 = `${illuminatedClasses} translate-x-[45vw] -translate-y-[5vh] rotate-[5deg] scale-105`
+  
+  // Removed heavy filters for mobile, kept for desktop, separated transform classes
+  const illuminatedBase = "shadow-[0_0_60px_rgba(255,69,0,0.4)] border-orange-500/50 md:blur-[1px] md:brightness-110 md:saturate-150"
+  
+  const blast1 = isBurning ? `${illuminatedBase} translate-x-[20vw] -translate-y-[10vh] rotate-[15deg] scale-90` : "translate-x-0 translate-y-0 rotate-0 scale-100"
+  const blast2 = isBurning ? `${illuminatedBase} translate-x-[35vw] translate-y-[5vh] rotate-[25deg] scale-110` : "translate-x-0 translate-y-0 rotate-0 scale-100"
+  const blast3 = isBurning ? `${illuminatedBase} translate-x-[15vw] translate-y-[15vh] -rotate-[15deg] scale-95` : "translate-x-0 translate-y-0 rotate-0 scale-100"
+  const blast4 = isBurning ? `${illuminatedBase} translate-x-[45vw] -translate-y-[5vh] rotate-[5deg] scale-105` : "translate-x-0 translate-y-0 rotate-0 scale-100"
   return (
     <section id="about" className="relative mx-auto w-full pb-8 pt-24 lg:pt-28">
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6 auto-rows-auto w-full">
-        <BentoCard className={`min-w-0 col-span-1 md:col-span-4 lg:col-span-3 lg:row-span-2 flex flex-col justify-between space-y-8 relative z-20 transition-opacity duration-500 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
+        <BentoCard className={`min-w-0 col-span-1 md:col-span-4 lg:col-span-3 lg:row-span-2 flex flex-col justify-between space-y-8 relative z-20 transition-all duration-1000 ease-out ${isBurning ? burningClasses : 'opacity-100'}`}>
           <FireEffect isActive={isBurning} />
           <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -145,7 +148,7 @@ export function Hero() {
             </div>
           </div>
         </BentoCard>
-        <BentoCard className={`min-w-0 col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col relative z-20 ${isBurning ? blast1 : 'transition-all duration-1000 ease-out'}`} noPadding>
+        <BentoCard className={`min-w-0 col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col relative z-20 transition-all duration-1000 ease-out ${blast1}`} noPadding>
           <div className="p-6 pb-2 flex items-baseline gap-2">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-mono glitch-hover">DAILY</h2>
             <p className="text-xl sm:text-2xl font-bold text-text-secondary">STACK.</p>
@@ -156,19 +159,19 @@ export function Hero() {
             <TechCategory title="Tools" skills={['Git', 'Vercel', 'Figma']} />
           </div>
         </BentoCard>
-        <BentoCard className={`min-w-0 col-span-1 md:col-span-1 lg:col-span-1 relative min-h-[200px] md:min-h-[200px] group z-20 ${isBurning ? blast2 : 'transition-all duration-1000 ease-out'}`} noPadding>
+        <BentoCard className={`min-w-0 col-span-1 md:col-span-1 lg:col-span-1 relative min-h-[200px] md:min-h-[200px] group z-20 transition-all duration-1000 ease-out ${blast2}`} noPadding>
           <div className="absolute inset-0 overflow-hidden rounded-3xl">
             <Image
               src="/profile.jpg"
               alt="Lucas Rubira"
               fill
-              className="object-cover group-hover:scale-105 group-hover:rotate-1 transition-all duration-500 ease-out"
+              className="object-cover object-[center_60%] md:object-center group-hover:scale-105 group-hover:rotate-1 transition-all duration-500 ease-out"
               sizes="(max-width: 1024px) 100vw, 33vw"
               priority
             />
           </div>
         </BentoCard>
-        <BentoCard className={`hidden md:flex min-w-0 col-span-1 lg:col-span-1 flex-col items-center justify-center bg-surface-hover/30 min-h-[200px] md:min-h-0 relative group overflow-hidden z-20 ${isBurning ? blast3 : 'transition-all duration-1000 ease-out'}`} noPadding>
+        <BentoCard className={`hidden md:flex min-w-0 col-span-1 lg:col-span-1 flex-col items-center justify-center bg-surface-hover/30 min-h-[200px] md:min-h-0 relative group overflow-hidden z-20 transition-all duration-1000 ease-out ${blast3}`} noPadding>
           <div className="absolute inset-0 bg-gradient-to-br from-accent-red/5 to-accent-cyan/5 opacity-50"></div>
           <Image
             src="/dragon.gif"
@@ -180,10 +183,10 @@ export function Hero() {
           />
           <p className="absolute bottom-4 text-[10px] font-mono text-text-secondary tracking-widest opacity-50 uppercase">Companion</p>
         </BentoCard>
-        <div className={`min-w-0 overflow-hidden col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 transition-opacity duration-500 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
+        <div className={`min-w-0 col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 transition-opacity duration-500 py-6 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
           <FireEffect isActive={isBurning} />
           <FloatingCodeSnippet
-            className="w-full h-full"
+            className="w-full"
             delay={0}
             code={
               <>
@@ -196,9 +199,9 @@ export function Hero() {
             }
           />
         </div>
-        <div className={`min-w-0 overflow-hidden col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 ${isBurning ? blast4 : 'transition-all duration-1000 ease-out'}`}>
+        <div className={`min-w-0 col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 transition-all duration-1000 py-6 ease-out ${blast4}`}>
           <FloatingCodeSnippet
-            className="w-full h-full"
+            className="w-full"
             delay={0.4}
             code={
               <>

@@ -11,11 +11,11 @@ export function Nav() {
     <nav className="fixed top-0 z-50 w-full border-b border-border-subtle bg-background/80 backdrop-blur-md transition-colors">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <GlitchText>
-          <a href="#" className="flex items-center space-x-1 font-bold text-xl tracking-tight cursor-pointer">
+          <span className="flex items-center space-x-1 font-bold text-xl tracking-tight">
             <span className="text-text-primary">Lucas</span>
             <span className="text-accent-red">Rubira</span>
             <Diamond className="h-4 w-4 ml-0.5 text-accent-red fill-accent-red" />
-          </a>
+          </span>
         </GlitchText>
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
           <GlitchText>

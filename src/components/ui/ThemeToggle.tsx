@@ -41,8 +41,10 @@ export function ThemeToggle() {
           setShowCaraxes(false)
           setShowFireGradient(false)
           setTheme("light")
-          window.dispatchEvent(new CustomEvent('caraxes-transition', { detail: { state: 'restore' } }))
-          setIsTransitioning(false)
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('caraxes-transition', { detail: { state: 'restore' } }))
+            setIsTransitioning(false)
+          }, 50)
           setTimeout(() => {
             document.body.style.overflow = ''
           }, 2000)
@@ -85,7 +87,7 @@ export function ThemeToggle() {
             alt="Caraxes Transition"
             fill
             unoptimized
-            className="object-cover mix-blend-multiply"
+            className="object-cover object-[20%_70%] md:object-center mix-blend-multiply"
           />
         </div>,
         document.body

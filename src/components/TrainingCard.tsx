@@ -19,8 +19,12 @@ export function TrainingCard({ training, isList = false }: TrainingCardProps) {
   const tags = Array.isArray(training.tags) ? training.tags : training.tags[language]
 
   return (
-    <div className={cn(
-      "group flex overflow-hidden rounded-xl border border-border-subtle bg-surface transition-all hover:-translate-y-1 hover:shadow-2xl h-full",
+    <a
+      href={training.canvaUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+      "group flex overflow-hidden rounded-xl border border-border-subtle bg-surface transition-all hover:-translate-y-1 hover:shadow-2xl h-full cursor-pointer",
       isList ? "flex-col md:flex-row" : "flex-col"
     )}>
       <div className={cn(
@@ -38,7 +42,7 @@ export function TrainingCard({ training, isList = false }: TrainingCardProps) {
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex flex-col items-start gap-3">
           <GlitchText randomGlitch>
-            <h3 className="text-xl font-bold text-text-primary">{title}</h3>
+            <h3 className="text-xl font-bold text-text-primary group-hover:text-accent-cyan transition-colors">{title}</h3>
           </GlitchText>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
@@ -51,19 +55,10 @@ export function TrainingCard({ training, isList = false }: TrainingCardProps) {
             ))}
           </div>
         </div>
-        <p className="mb-6 flex-1 text-sm text-text-secondary line-clamp-3">
+        <p className="flex-1 text-sm text-text-secondary line-clamp-3">
           {description}
         </p>
-        <a 
-          href={training.canvaUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 font-mono text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan leading-none"
-        >
-          <Presentation className="h-4 w-4 shrink-0 mb-[1px]" />
-          <span className="mt-[1px]">{t("Trainings.view") || "View Presentation"}</span>
-        </a>
       </div>
-    </div>
+    </a>
   )
 }

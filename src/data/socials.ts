@@ -30,8 +30,8 @@ export const socials: SocialLink[] = [
   {
     id: 'resume',
     url: {
-      en: 'https://drive.google.com/file/d/1NsTCGboYwQtoEbDw0hf_1pswDMApd7cA/view?usp=sharing',
-      pt: 'https://drive.google.com/file/d/1wYRHDk2NOMKVgOJArpVj4HSHbVvlyRne/view?usp=sharing'
+      en: 'https://drive.google.com/file/d/14dpoYu1hNTpR6Oqik1pX44hWJYiMN-GR/view?usp=sharing',
+      pt: 'https://drive.google.com/file/d/1IXJheW29FIXO0yXVQHmRZi9zqOwLVKAo/view?usp=sharing'
     },
     label: 'Resume/CV',
     icon: CvIcon
