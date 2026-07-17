@@ -28,6 +28,11 @@ export function Nav() {
               {t("Nav.projects")}
             </a>
           </GlitchText>
+          <GlitchText>
+            <a href="#trainings" className="text-text-secondary hover:text-accent-cyan transition-colors">
+              {t("Nav.trainings")}
+            </a>
+          </GlitchText>
         </div>
         <div className="flex items-center space-x-2 sm:space-x-3">
           <ThemeToggle />

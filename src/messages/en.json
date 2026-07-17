@@ -1,7 +1,8 @@
 {
   "Nav": {
     "about": "About",
-    "projects": "Projects"
+    "projects": "Projects",
+    "trainings": "Trainings"
   },
   "Hero": {
     "status": "Status: Coding / Gaming",
@@ -14,6 +15,10 @@
   "Projects": {
     "title": "Featured Projects",
     "github": "<> GitHub"
+  },
+  "Trainings": {
+    "title": "Trainings & Presentations",
+    "view": "View Presentation"
   },
   "Footer": {
     "copyright": "© {year} Lucas Rubira • Built with love"

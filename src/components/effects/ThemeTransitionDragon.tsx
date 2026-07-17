@@ -1,24 +1,42 @@
 "use client";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 export function ThemeTransitionDragon() {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState(theme);
-  const isSwitchingToLight = theme === "light";
-  const durationMs = isSwitchingToLight ? 4500 : 3000;
+  const [isSwitchingToLight, setIsSwitchingToLight] = useState(false);
+  const prevTheme = useRef<string | undefined>(undefined);
+  
   useEffect(() => {
-    if (theme && currentTheme !== theme) {
-      setCurrentTheme(theme);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !theme) return;
+
+    if (!prevTheme.current) {
+      prevTheme.current = theme;
+      return;
+    }
+
+    if (theme !== prevTheme.current) {
+      setIsSwitchingToLight(theme === "light");
       setIsPlaying(true);
+      prevTheme.current = theme;
+      
+      const duration = theme === "light" ? 4500 : 3000;
       const timer = setTimeout(() => {
         setIsPlaying(false);
-      }, durationMs);
+      }, duration);
+      
       return () => clearTimeout(timer);
     }
-  }, [theme, currentTheme, durationMs]);
-  if (!isPlaying) return null;
+  }, [theme, mounted]);
+
+  if (!mounted || !isPlaying) return null;
+  
   const gifSrc = isSwitchingToLight ? "/dragon_flying.gif" : "/haunter.gif";
   const blendMode = isSwitchingToLight ? "mix-blend-multiply" : "mix-blend-screen";
   const animationName = isSwitchingToLight ? "flyAcross" : "flyAcrossReverse";

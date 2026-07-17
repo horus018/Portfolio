@@ -43,8 +43,10 @@ export function ThemeToggle() {
           setTheme("light")
           window.dispatchEvent(new CustomEvent('caraxes-transition', { detail: { state: 'restore' } }))
           setIsTransitioning(false)
-          document.body.style.overflow = ''
-        }, 2000)
+          setTimeout(() => {
+            document.body.style.overflow = ''
+          }, 1000)
+        }, 3500)
       }, 600)
     }
   }

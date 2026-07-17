@@ -1,20 +1,20 @@
 "use client"
 import * as React from "react"
 import { useLanguage } from "@/context/LanguageContext"
-import type { Project } from "@/data/projects"
+import type { Training } from "@/data/trainings"
 import Image from "next/image"
-import { Code2 } from "lucide-react"
+import { Presentation } from "lucide-react"
 import { GlitchText } from "./effects/GlitchText"
 import { getBadgeColor, cn } from "@/lib/utils"
 
-interface ProjectCardProps {
-  project: Project
+interface TrainingCardProps {
+  training: Training
   isList?: boolean
 }
 
-export function ProjectCard({ project, isList = false }: ProjectCardProps) {
+export function TrainingCard({ training, isList = false }: TrainingCardProps) {
   const { t, language } = useLanguage()
-  const description = project.description[language]
+  const description = training.description[language]
 
   return (
     <div className={cn(
@@ -26,8 +26,8 @@ export function ProjectCard({ project, isList = false }: ProjectCardProps) {
         isList ? "aspect-video md:aspect-[4/3] w-full md:w-72 lg:w-96" : "aspect-video w-full"
       )}>
         <Image
-          src={project.imagePath}
-          alt={project.title}
+          src={training.imagePath}
+          alt={training.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -36,10 +36,10 @@ export function ProjectCard({ project, isList = false }: ProjectCardProps) {
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex flex-col items-start gap-3">
           <GlitchText>
-            <h3 className="text-xl font-bold text-text-primary">{project.title}</h3>
+            <h3 className="text-xl font-bold text-text-primary">{training.title}</h3>
           </GlitchText>
           <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
+            {training.tags.map((tag) => (
               <span 
                 key={tag} 
                 className={cn("rounded px-2 py-0.5 text-xs font-medium", getBadgeColor(tag))}
@@ -53,14 +53,13 @@ export function ProjectCard({ project, isList = false }: ProjectCardProps) {
           {description}
         </p>
         <a 
-          href={project.githubUrl} 
+          href={training.canvaUrl} 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 font-mono text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan"
         >
-          <Code2 className="h-4 w-4" />
-          {t("Projects.github").replace("<> ", "")} 
-          {}
+          <Presentation className="h-4 w-4" />
+          {t("Trainings.view") || "View Presentation"}
         </a>
       </div>
     </div>

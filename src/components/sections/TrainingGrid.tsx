@@ -1,23 +1,22 @@
 "use client"
 import * as React from "react"
 import { useLanguage } from "@/context/LanguageContext"
-import { projects } from "@/data/projects"
-import { ProjectCard } from "../ProjectCard"
+import { trainings } from "@/data/trainings"
+import { TrainingCard } from "../TrainingCard"
 import { LayoutGrid, List as ListIcon, GalleryHorizontal, Layers } from "lucide-react"
-import { FaGithub as Github } from "react-icons/fa"
 import { cn } from "@/lib/utils"
 
 type ViewMode = "grid" | "list" | "carousel" | "stack"
 
-export function ProjectGrid() {
+export function TrainingGrid() {
   const { t } = useLanguage()
   const [viewMode, setViewMode] = React.useState<ViewMode>("grid")
 
   return (
-    <section id="projects" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 w-full">
+    <section id="trainings" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 w-full">
       <div className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary text-center md:text-left">
-          {t("Projects.title")}
+          {t("Trainings.title") || "Treinamentos & Apresentações"}
         </h2>
         
         <div className="flex items-center gap-2">
@@ -51,42 +50,19 @@ export function ProjectGrid() {
         viewMode === "list" && "flex flex-col",
         viewMode === "carousel" && "flex overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-accent-cyan scrollbar-track-transparent items-stretch"
       )}>
-        {projects.map((project) => (
+        {trainings.map((training) => (
           <div 
-            key={project.id} 
+            key={training.id} 
             className={cn(
               "flex",
               viewMode === "carousel" && "shrink-0 w-80 md:w-[400px] snap-center h-auto"
             )}
           >
             <div className="w-full h-full">
-              <ProjectCard project={project} isList={viewMode === "list"} />
+              <TrainingCard training={training} isList={viewMode === "list"} />
             </div>
           </div>
         ))}
-        
-        {/* View All Projects Card */}
-        <div
-          className={cn(
-            "group flex flex-col overflow-hidden rounded-xl border border-dashed border-border-subtle bg-transparent transition-all hover:-translate-y-1 hover:border-accent-cyan hover:shadow-[0_0_20px_rgba(129,243,229,0.1)]",
-            viewMode === "carousel" && "shrink-0 w-80 md:w-[400px] snap-center h-auto",
-            viewMode === "grid" && "min-h-[300px]",
-            viewMode === "list" && "py-12"
-          )}
-        >
-          <a
-            href="https://github.com/horus018"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-1 flex-col items-center justify-center p-8 text-center text-text-secondary hover:text-text-primary transition-colors h-full"
-          >
-            <div className="rounded-full bg-surface p-4 mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:text-accent-cyan">
-              <Github className="w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Ver todos os projetos</h3>
-            <p className="text-sm opacity-80">Explore mais repositórios no meu GitHub.</p>
-          </a>
-        </div>
       </div>
     </section>
   )

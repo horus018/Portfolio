@@ -1,6 +1,7 @@
 "use client"
 import * as React from "react"
 import { useLanguage } from "@/context/LanguageContext"
+import { FireEffect } from "../effects/FireEffect"
 import { Badge } from "../ui/Badge"
 import { SocialIcon } from "../ui/SocialIcon"
 import { Button } from "../ui/Button"
@@ -23,7 +24,7 @@ function TechCategory({ title, skills }: { title: string, skills: string[] }) {
   )
 }
 export function Hero() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [caraxesState, setCaraxesState] = React.useState<'idle' | 'burning' | 'restore'>('idle')
   React.useEffect(() => {
     const handleCaraxes = (e: any) => {
@@ -37,11 +38,16 @@ export function Hero() {
   }, [])
   const isBurning = caraxesState === 'burning'
   const burningClasses = "fire-burn-out"
-  const illuminatedClasses = "shadow-[0_0_60px_rgba(255,69,0,0.4)] border-orange-500/50 blur-[1px] brightness-110 saturate-150 transition-all duration-500 ease-in-out"
+  const illuminatedClasses = "shadow-[0_0_60px_rgba(255,69,0,0.4)] border-orange-500/50 blur-[1px] brightness-110 saturate-150 transition-all duration-1000 ease-out"
+  const blast1 = `${illuminatedClasses} translate-x-[20vw] -translate-y-[10vh] rotate-[15deg] scale-90`
+  const blast2 = `${illuminatedClasses} translate-x-[35vw] translate-y-[5vh] rotate-[25deg] scale-110`
+  const blast3 = `${illuminatedClasses} translate-x-[15vw] translate-y-[15vh] -rotate-[15deg] scale-95`
+  const blast4 = `${illuminatedClasses} translate-x-[45vw] -translate-y-[5vh] rotate-[5deg] scale-105`
   return (
     <section id="about" className="relative mx-auto w-full pb-20 pt-32 lg:pt-40">
-      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6 auto-rows-auto">
-        <BentoCard className={`col-span-1 md:col-span-4 lg:col-span-3 lg:row-span-2 flex flex-col justify-between space-y-8 relative z-20 transition-opacity duration-500 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6 auto-rows-auto w-full">
+        <BentoCard className={`min-w-0 col-span-1 md:col-span-4 lg:col-span-3 lg:row-span-2 flex flex-col justify-between space-y-8 relative z-20 transition-opacity duration-500 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
+          <FireEffect isActive={isBurning} />
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <Badge>{t("Hero.status")}</Badge>
@@ -66,7 +72,7 @@ export function Hero() {
                 </a>
               </Button>
               <Button asChild variant="secondary">
-                <a href={socials.find(s => s.id === 'whatsapp')?.url || '#'}>
+                <a href={(socials.find(s => s.id === 'whatsapp')?.url as string) || '#'}>
                   {t("Hero.contactMe")}
                 </a>
               </Button>
@@ -76,14 +82,15 @@ export function Hero() {
                 </a>
               </Button>
             </div>
-            <div className="flex items-center gap-3">
-              {socials.map((social) => (
-                <SocialIcon key={social.id} href={social.url} icon={<social.icon className="h-5 w-5" />} />
-              ))}
+            <div className="flex items-center gap-3 flex-wrap">
+              {socials.map((social) => {
+                const href = typeof social.url === 'string' ? social.url : social.url[language]
+                return <SocialIcon key={social.id} href={href} icon={<social.icon className="h-5 w-5" />} />
+              })}
             </div>
           </div>
         </BentoCard>
-        <BentoCard className={`col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col relative z-20 ${isBurning ? illuminatedClasses : 'transition-all duration-500 ease-in-out'}`} noPadding>
+        <BentoCard className={`min-w-0 col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col relative z-20 ${isBurning ? blast1 : 'transition-all duration-1000 ease-out'}`} noPadding>
           <div className="p-6 pb-2 flex items-baseline gap-2">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-mono glitch-hover">DAILY</h2>
             <p className="text-xl sm:text-2xl font-bold text-text-secondary">STACK.</p>
@@ -94,7 +101,7 @@ export function Hero() {
             <TechCategory title="Tools" skills={['Git', 'Vercel', 'Figma']} />
           </div>
         </BentoCard>
-        <BentoCard className={`col-span-1 md:col-span-1 lg:col-span-1 relative min-h-[200px] md:min-h-0 group z-20 ${isBurning ? illuminatedClasses : 'transition-all duration-500 ease-in-out'}`} noPadding>
+        <BentoCard className={`min-w-0 col-span-1 md:col-span-1 lg:col-span-1 relative min-h-[200px] md:min-h-[200px] group z-20 ${isBurning ? blast2 : 'transition-all duration-1000 ease-out'}`} noPadding>
           <div className="absolute inset-0 overflow-hidden rounded-3xl">
             <Image
               src="/profile.jpg"
@@ -106,7 +113,7 @@ export function Hero() {
             />
           </div>
         </BentoCard>
-        <BentoCard className={`col-span-1 md:col-span-1 lg:col-span-1 flex flex-col items-center justify-center bg-surface-hover/30 min-h-[200px] md:min-h-0 relative group overflow-hidden z-20 ${isBurning ? illuminatedClasses : 'transition-all duration-500 ease-in-out'}`} noPadding>
+        <BentoCard className={`hidden md:flex min-w-0 col-span-1 lg:col-span-1 flex-col items-center justify-center bg-surface-hover/30 min-h-[200px] md:min-h-0 relative group overflow-hidden z-20 ${isBurning ? blast3 : 'transition-all duration-1000 ease-out'}`} noPadding>
           <div className="absolute inset-0 bg-gradient-to-br from-accent-red/5 to-accent-cyan/5 opacity-50"></div>
           <Image
             src="/dragon.gif"
@@ -115,12 +122,11 @@ export function Hero() {
             alt="Dragon"
             className="opacity-70 group-hover:opacity-100 drop-shadow-[0_0_15px_rgba(255,59,78,0.5)] group-hover:scale-110 transition-all duration-300 z-10"
             unoptimized
-            priority={true}
-            style={{ width: "auto", height: "auto" }}
           />
           <p className="absolute bottom-4 text-[10px] font-mono text-text-secondary tracking-widest opacity-50 uppercase">Companion</p>
         </BentoCard>
-        <div className={`col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 transition-opacity duration-500 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
+        <div className={`min-w-0 overflow-hidden col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 transition-opacity duration-500 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
+          <FireEffect isActive={isBurning} />
           <FloatingCodeSnippet
             className="w-full h-full"
             delay={0}
@@ -135,20 +141,22 @@ export function Hero() {
             }
           />
         </div>
-        <FloatingCodeSnippet
-          className={`col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 ${isBurning ? illuminatedClasses : 'transition-all duration-500 ease-in-out'}`}
-          delay={0.4}
-          code={
-            <>
-              <span className="text-code-purple">def</span> <span className="text-accent-cyan">morning_routine</span><br />
-              {'  '}<span className="text-code-purple">while</span> coffee_cup.empty?<br />
-              {'    '}refill_coffee<br />
-              {'  '}<span className="text-code-purple">end</span><br />
-              {'  '}start_coding(<span className="text-code-green">framework: 'Ruby on Rails'</span>)<br />
-              <span className="text-code-purple">end</span>
-            </>
-          }
-        />
+        <div className={`min-w-0 overflow-hidden col-span-1 md:col-span-2 lg:col-span-3 min-h-[160px] w-full relative z-20 ${isBurning ? blast4 : 'transition-all duration-1000 ease-out'}`}>
+          <FloatingCodeSnippet
+            className="w-full h-full"
+            delay={0.4}
+            code={
+              <>
+                <span className="text-code-purple">def</span> <span className="text-accent-cyan">morning_routine</span><br />
+                {'  '}<span className="text-code-purple">while</span> coffee_cup.empty?<br />
+                {'    '}refill_coffee<br />
+                {'  '}<span className="text-code-purple">end</span><br />
+                {'  '}start_coding(<span className="text-code-green">framework: 'Ruby on Rails'</span>)<br />
+                <span className="text-code-purple">end</span>
+              </>
+            }
+          />
+        </div>
       </div>
     </section>
   )
