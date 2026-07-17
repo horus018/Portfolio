@@ -7,6 +7,7 @@ import { TrainingGrid } from "@/components/sections/TrainingGrid";
 import { Footer } from "@/components/sections/Footer";
 import { ThemeTransitionDragon } from "@/components/effects/ThemeTransitionDragon";
 import { CircuitBackground } from "@/components/effects/CircuitBackground";
+import { MusicalNotesBackground } from "@/components/effects/MusicalNotesBackground";
 import { ExperienceGrid } from "@/components/sections/ExperienceGrid";
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
 
@@ -16,6 +17,7 @@ export default function Page() {
   return (
     <>
       <CircuitBackground />
+      <MusicalNotesBackground />
       <ThemeTransitionDragon />
       <Nav />
       <main className="flex-1 flex flex-col items-center w-full max-w-7xl mx-auto px-6 lg:px-8">
