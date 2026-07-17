@@ -7,7 +7,7 @@ export function Footer() {
   const { t } = useLanguage()
   const year = new Date().getFullYear().toString()
   return (
-    <footer className="w-full border-t border-border-subtle bg-surface/30 py-8 text-center mt-32 transition-colors">
+    <footer className="w-full border-t border-border-subtle bg-surface/30 py-6 text-center mt-12 transition-colors">
       <p className="font-mono text-sm text-text-secondary flex items-center justify-center gap-1.5 flex-wrap">
         <span>© {year}</span>
         <span className="text-text-primary font-bold">Lucas Rubira</span>

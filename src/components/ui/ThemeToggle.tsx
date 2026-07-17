@@ -31,7 +31,10 @@ export function ThemeToggle() {
       }, 1500)
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' })
-      document.body.style.overflow = 'hidden'
+      // Delaying the overflow: hidden allows the smooth scroll to complete on mobile
+      setTimeout(() => {
+        document.body.style.overflow = 'hidden'
+      }, 500)
       setIsTransitioning(true)
       setShowCaraxes(true)
       setTimeout(() => {
