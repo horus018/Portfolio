@@ -115,6 +115,8 @@ export function Hero() {
             alt="Dragon"
             className="opacity-70 group-hover:opacity-100 drop-shadow-[0_0_15px_rgba(255,59,78,0.5)] group-hover:scale-110 transition-all duration-300 z-10"
             unoptimized
+            priority={true}
+            style={{ width: "auto", height: "auto" }}
           />
           <p className="absolute bottom-4 text-[10px] font-mono text-text-secondary tracking-widest opacity-50 uppercase">Companion</p>
         </BentoCard>

@@ -86,11 +86,6 @@
   animation: glitch 250ms linear;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .glitch-hover:hover {
-    animation: none;
-  }
-}
 
 @keyframes neon-flicker {
   0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 1; }
