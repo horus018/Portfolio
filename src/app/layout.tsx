@@ -15,6 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Lucas Rubira | Software Developer",
   description: "Personal portfolio of Lucas Rubira, Software Developer focused on Ruby on Rails and React.",
+  icons: {
+    icon: "/favicon.svg",
+  }
 };
 export default function RootLayout({
   children,

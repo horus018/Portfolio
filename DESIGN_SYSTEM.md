@@ -126,7 +126,7 @@ All three buttons sit in one horizontal row on desktop, stack vertically on mobi
 - **JS/React snippet:**
 ```js
 const status = useGameState({
-  playing: ['Minecraft', 'Clash of Clans'],
+  playing: ['Minecraft', 'Clash of Clans', 'Project Zomboid'],
   townHallLevel: '16',
   dragonsDefeated: 42,
 });

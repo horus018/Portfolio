@@ -15,6 +15,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, isList = false }: ProjectCardProps) {
   const { t, language } = useLanguage()
   const description = project.description[language]
+  const title = typeof project.title === 'string' ? project.title : project.title[language]
 
   return (
     <div className={cn(
@@ -27,7 +28,7 @@ export function ProjectCard({ project, isList = false }: ProjectCardProps) {
       )}>
         <Image
           src={project.imagePath}
-          alt={project.title}
+          alt={typeof project.title === 'string' ? project.title : project.title.en}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -35,8 +36,8 @@ export function ProjectCard({ project, isList = false }: ProjectCardProps) {
       </div>
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex flex-col items-start gap-3">
-          <GlitchText>
-            <h3 className="text-xl font-bold text-text-primary">{project.title}</h3>
+          <GlitchText randomGlitch>
+            <h3 className="text-xl font-bold text-text-primary">{title}</h3>
           </GlitchText>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
@@ -56,11 +57,10 @@ export function ProjectCard({ project, isList = false }: ProjectCardProps) {
           href={project.githubUrl} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 font-mono text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan"
+          className="inline-flex items-center gap-2 font-mono text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan leading-none"
         >
-          <Code2 className="h-4 w-4" />
-          {t("Projects.github").replace("<> ", "")} 
-          {}
+          <Code2 className="h-4 w-4 shrink-0 mb-[1px]" />
+          <span className="mt-[1px]">{t("Projects.github").replace("<> ", "")}</span> 
         </a>
       </div>
     </div>

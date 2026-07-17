@@ -9,6 +9,9 @@ import { socials } from "@/data/socials"
 import { FloatingCodeSnippet } from "../decorations/FloatingCodeSnippet"
 import { BentoCard } from "../ui/BentoCard"
 import Image from "next/image"
+import { TypeAnimation } from 'react-type-animation'
+import { Download } from 'lucide-react'
+
 function TechCategory({ title, skills }: { title: string, skills: string[] }) {
   return (
     <div className="flex flex-col gap-2">
@@ -26,6 +29,26 @@ function TechCategory({ title, skills }: { title: string, skills: string[] }) {
 export function Hero() {
   const { t, language } = useLanguage()
   const [caraxesState, setCaraxesState] = React.useState<'idle' | 'burning' | 'restore'>('idle')
+  const [isGlitching, setIsGlitching] = React.useState(false)
+
+  const [currentFont, setCurrentFont] = React.useState('font-sans')
+  const softwareDeveloperText = language === 'pt' ? 'Desenvolvedor' : 'Software Developer'
+
+  React.useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    const triggerGlitch = () => {
+      setIsGlitching(true);
+      setTimeout(() => setIsGlitching(false), 250);
+      const nextGlitchIn = Math.floor(Math.random() * 2000) + 1000; // Between 1000ms and 3000ms
+      timeout = setTimeout(triggerGlitch, nextGlitchIn);
+    };
+
+    timeout = setTimeout(triggerGlitch, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   React.useEffect(() => {
     const handleCaraxes = (e: any) => {
       setCaraxesState(e.detail.state)
@@ -44,7 +67,7 @@ export function Hero() {
   const blast3 = `${illuminatedClasses} translate-x-[15vw] translate-y-[15vh] -rotate-[15deg] scale-95`
   const blast4 = `${illuminatedClasses} translate-x-[45vw] -translate-y-[5vh] rotate-[5deg] scale-105`
   return (
-    <section id="about" className="relative mx-auto w-full pb-20 pt-32 lg:pt-40">
+    <section id="about" className="relative mx-auto w-full pb-8 pt-24 lg:pt-28">
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6 auto-rows-auto w-full">
         <BentoCard className={`min-w-0 col-span-1 md:col-span-4 lg:col-span-3 lg:row-span-2 flex flex-col justify-between space-y-8 relative z-20 transition-opacity duration-500 ease-in-out ${isBurning ? burningClasses : 'opacity-100'}`}>
           <FireEffect isActive={isBurning} />
@@ -53,11 +76,39 @@ export function Hero() {
               <Badge>{t("Hero.status")}</Badge>
             </div>
             <div className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-text-primary glitch-hover w-fit">
-                Lucas Rubira
+              <h1 className={`text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-text-primary glitch-hover w-fit h-[48px] sm:h-[60px] flex items-center transition-all duration-300 ${isGlitching ? 'glitch-active' : ''} ${currentFont}`}>
+                <TypeAnimation
+                  key={language} // Force re-render on language change
+                  sequence={[
+                    () => setCurrentFont('font-sans'),
+                    'Lucas Rubira',
+                    2000,
+                    '',
+                    500,
+                    () => setCurrentFont('font-mono'),
+                    softwareDeveloperText,
+                    2000,
+                    '',
+                    500,
+                    () => setCurrentFont('font-serif italic'),
+                    'Lucas Rubira',
+                    2000,
+                    '',
+                    500,
+                    () => setCurrentFont('font-sans'),
+                    softwareDeveloperText,
+                    2000,
+                    '',
+                    500,
+                  ]}
+                  wrapper="span"
+                  cursor={true}
+                  repeat={Infinity}
+                  className="inline-block"
+                />
               </h1>
               <h2 className="text-lg sm:text-xl text-text-secondary leading-relaxed font-medium">
-                Desenvolvedor de Software focado em <span className="inline-flex items-center gap-1.5 text-accent-red font-bold">Ruby on Rails</span> e <span className="text-accent-cyan font-bold">React</span>.
+                {t("Hero.rolePrefix")}<span className="inline-flex items-center gap-1.5 text-accent-red font-bold">Ruby on Rails</span>{t("Hero.roleAnd")}<span className="text-accent-cyan font-bold">React</span>{t("Hero.roleSuffix")}
               </h2>
               <p className="text-base text-text-secondary leading-relaxed max-w-lg">
                 {t("Hero.description")}
@@ -66,24 +117,28 @@ export function Hero() {
           </div>
           <div className="space-y-6">
             <div className="flex flex-wrap gap-3 w-full">
-              <Button asChild variant="primary">
+              <a
+                href={typeof socials.find(s => s.id === 'resume')?.url === 'string' ? socials.find(s => s.id === 'resume')?.url as string : (socials.find(s => s.id === 'resume')?.url as any)?.[language] || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:opacity-90 text-white px-6 py-2.5 rounded-full flex items-center gap-2 font-semibold transition-opacity"
+              >
+                Resume <Download className="w-5 h-5" />
+              </a>
+              <Button asChild variant="primary" className="rounded-full">
                 <a href="#projects">
                   {t("Hero.viewProjects")}
                 </a>
               </Button>
-              <Button asChild variant="secondary">
+              <Button asChild variant="secondary" className="rounded-full">
                 <a href={(socials.find(s => s.id === 'whatsapp')?.url as string) || '#'}>
                   {t("Hero.contactMe")}
-                </a>
-              </Button>
-              <Button asChild variant="tertiary">
-                <a href="#certificates">
-                  {t("Hero.certificates")}
                 </a>
               </Button>
             </div>
             <div className="flex items-center gap-3 flex-wrap">
               {socials.map((social) => {
+                if (social.id === 'resume') return null; // Skip resume in social icons since it has a prominent button
                 const href = typeof social.url === 'string' ? social.url : social.url[language]
                 return <SocialIcon key={social.id} href={href} icon={<social.icon className="h-5 w-5" />} />
               })}
@@ -96,8 +151,8 @@ export function Hero() {
             <p className="text-xl sm:text-2xl font-bold text-text-secondary">STACK.</p>
           </div>
           <div className="flex-1 overflow-y-auto p-6 pt-4 space-y-6 bg-black/5 dark:bg-white/5 rounded-b-3xl">
-            <TechCategory title="Frontend" skills={['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']} />
-            <TechCategory title="Backend" skills={['Ruby on Rails', 'Ruby', 'Node.js', 'PostgreSQL', 'Docker']} />
+            <TechCategory title="Frontend" skills={['React', 'Next.js', 'TypeScript', 'Tailwind CSS']} />
+            <TechCategory title="Backend" skills={['Ruby on Rails', 'Ruby', 'Node.js', 'PostgreSQL', 'Docker', 'SpringBoot']} />
             <TechCategory title="Tools" skills={['Git', 'Vercel', 'Figma']} />
           </div>
         </BentoCard>
@@ -133,8 +188,8 @@ export function Hero() {
             code={
               <>
                 <span className="text-code-purple">const</span> status = <span className="text-accent-cyan">useGameState</span>({'{'}<br />
-                {'  '}playing: [<span className="text-code-green">'Minecraft'</span>, <span className="text-code-green">'Clash of Clans'</span>],<br />
-                {'  '}townHallLevel: <span className="text-code-green">'16'</span>,<br />
+                {'  '}playing: [<span className="text-code-green">&apos;Minecraft&apos;</span>, <span className="text-code-green">&apos;Clash of Clans&apos;</span>],<br />
+                {'  '}townHallLevel: <span className="text-code-green">&apos;16&apos;</span>,<br />
                 {'  '}dragonsDefeated: <span className="text-code-green">42</span><br />
                 {'}'});
               </>
@@ -151,7 +206,7 @@ export function Hero() {
                 {'  '}<span className="text-code-purple">while</span> coffee_cup.empty?<br />
                 {'    '}refill_coffee<br />
                 {'  '}<span className="text-code-purple">end</span><br />
-                {'  '}start_coding(<span className="text-code-green">framework: 'Ruby on Rails'</span>)<br />
+                {'  '}start_coding(<span className="text-code-green">framework: &apos;Ruby on Rails&apos;</span>)<br />
                 <span className="text-code-purple">end</span>
               </>
             }

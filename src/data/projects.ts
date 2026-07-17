@@ -1,6 +1,6 @@
 export type Project = {
   id: string;
-  title: string;
+  title: Record<'en' | 'pt', string> | string;
   description: { en: string; pt: string };
   imagePath: string;
   tags: string[];
@@ -54,7 +54,10 @@ export const projects: Project[] = [
   },
   {
     id: "health-post",
-    title: "Saúde Conecta",
+    title: {
+      en: "Health Connect",
+      pt: "Saúde Conecta"
+    },
     description: {
       en: "A web application for creating and managing appointments for a health post.",
       pt: "Uma aplicação web para criação e gerenciamento de consultas para um posto de saúde."

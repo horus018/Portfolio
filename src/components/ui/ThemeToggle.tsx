@@ -45,9 +45,9 @@ export function ThemeToggle() {
           setIsTransitioning(false)
           setTimeout(() => {
             document.body.style.overflow = ''
-          }, 1000)
+          }, 2000)
         }, 3500)
-      }, 600)
+      }, 800)
     }
   }
   return (

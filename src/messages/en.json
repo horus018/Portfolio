@@ -6,7 +6,9 @@
   },
   "Hero": {
     "status": "Status: Coding / Gaming",
-    "role": "Software Developer focused on <ruby>Ruby on Rails</ruby> and <react>React</react>.",
+    "rolePrefix": "Software Developer focused on ",
+    "roleAnd": " and ",
+    "roleSuffix": ".",
     "description": "Crafting robust backends and dynamic user interfaces. When I'm not building applications, I'm probably managing a base in Clash of Clans or surviving in Project Zomboid.",
     "viewProjects": "View Projects",
     "contactMe": "Contact Me",
@@ -14,13 +16,18 @@
   },
   "Projects": {
     "title": "Featured Projects",
-    "github": "<> GitHub"
+    "github": "<> GitHub",
+    "viewAll": "View all projects",
+    "exploreMore": "Explore more repositories on my GitHub."
+  },
+  "Experience": {
+    "title": "Experience"
   },
   "Trainings": {
     "title": "Trainings & Presentations",
     "view": "View Presentation"
   },
   "Footer": {
-    "copyright": "© {year} Lucas Rubira • Built with love"
+    "builtWith": "Built with"
   }
 }

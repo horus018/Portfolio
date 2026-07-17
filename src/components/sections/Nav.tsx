@@ -24,6 +24,11 @@ export function Nav() {
             </a>
           </GlitchText>
           <GlitchText>
+            <a href="#experience" className="text-text-secondary hover:text-accent-red transition-colors">
+              {t("Experience.title") || "Experiência"}
+            </a>
+          </GlitchText>
+          <GlitchText>
             <a href="#projects" className="text-text-secondary hover:text-accent-red transition-colors">
               {t("Nav.projects")}
             </a>

@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react"
-import { motion, HTMLMotionProps, useReducedMotion } from "framer-motion"
+import { motion, HTMLMotionProps, useReducedMotion, useAnimation } from "framer-motion"
 import { cn } from "@/lib/utils"
 interface FloatingCodeSnippetProps extends HTMLMotionProps<"div"> {
   code: React.ReactNode;
@@ -8,14 +8,30 @@ interface FloatingCodeSnippetProps extends HTMLMotionProps<"div"> {
 }
 export function FloatingCodeSnippet({ className, code, delay = 0, ...props }: FloatingCodeSnippetProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [keyframes, setKeyframes] = React.useState<number[]>([0, -10, 5, -5, 0]);
+
+  React.useEffect(() => {
+    if (prefersReducedMotion) return;
+    
+    // Generate some random floating points once on mount to avoid hydration mismatch
+    const kf = [
+      0,
+      Math.random() * -10 - 5,
+      Math.random() * 5 + 2,
+      Math.random() * -8 - 2,
+      0
+    ];
+    setKeyframes(kf);
+  }, [prefersReducedMotion]);
+
   return (
     <motion.div
       initial={{ y: 0 }}
-      animate={!prefersReducedMotion ? { y: [-10, 0, -10] } : {}}
+      animate={!prefersReducedMotion ? { y: keyframes } : { y: 0 }}
       transition={!prefersReducedMotion ? {
-        repeat: Infinity,
-        duration: 4,
+        duration: 12,
         ease: "easeInOut",
+        repeat: Infinity,
         delay: delay
       } : {}}
       style={{ width: '100%', minWidth: '100%' }}

@@ -1,22 +1,28 @@
 export type Training = {
   id: string;
-  title: string;
+  title: Record<'en' | 'pt', string> | string;
   description: { en: string; pt: string };
   imagePath: string;
-  tags: string[];
+  tags: Record<'en' | 'pt', string[]> | string[];
   canvaUrl: string;
 };
 
 export const trainings: Training[] = [
   {
     id: "processo-aprendizado",
-    title: "O Processo de Aprendizado e a Programação",
+    title: {
+      en: "The Learning Process and Programming",
+      pt: "O Processo de Aprendizado e a Programação"
+    },
     description: {
       en: "A presentation on the learning process and computer programming.",
       pt: "Uma apresentação sobre o processo de aprendizado e a programação de computadores."
     },
     imagePath: "/aprendizado_programacao.png",
-    tags: ["Educação", "Programação"],
+    tags: {
+      en: ["Education", "Programming"],
+      pt: ["Educação", "Programação"]
+    },
     canvaUrl: "https://canva.link/wliws44eggzp93r"
   },
   {
@@ -27,7 +33,10 @@ export const trainings: Training[] = [
       pt: "Uma visão geral do Redis, estruturas de dados em memória e cache."
     },
     imagePath: "/redis.png",
-    tags: ["Banco de Dados", "Cache"],
+    tags: {
+      en: ["Database", "Cache"],
+      pt: ["Banco de Dados", "Cache"]
+    },
     canvaUrl: "https://canva.link/y5vr7y062m0r4f3"
   },
   {
@@ -54,7 +63,10 @@ export const trainings: Training[] = [
   },
   {
     id: "testes-automatizados",
-    title: "Testes Automatizados",
+    title: {
+      en: "Automated Tests",
+      pt: "Testes Automatizados"
+    },
     description: {
       en: "The importance and implementation of automated testing in software development.",
       pt: "A importância e implementação de testes automatizados no desenvolvimento de software."
@@ -65,13 +77,19 @@ export const trainings: Training[] = [
   },
   {
     id: "views-materializadas",
-    title: "Views Materializadas",
+    title: {
+      en: "Materialized Views",
+      pt: "Views Materializadas"
+    },
     description: {
       en: "Understanding materialized views for database performance optimization.",
       pt: "Entendendo views materializadas para otimização de performance em bancos de dados."
     },
     imagePath: "/views_materializadas.png",
-    tags: ["Banco de Dados", "SQL"],
+    tags: {
+      en: ["Database", "SQL"],
+      pt: ["Banco de Dados", "SQL"]
+    },
     canvaUrl: "https://canva.link/vod41gsgcqevukk"
   },
   {
@@ -82,7 +100,10 @@ export const trainings: Training[] = [
       pt: "Apresentação do projeto Work Instructions para linhas de montagem."
     },
     imagePath: "/work_instructions_training.png",
-    tags: ["Indústria", "Software"],
+    tags: {
+      en: ["Industry", "Software"],
+      pt: ["Indústria", "Software"]
+    },
     canvaUrl: "https://canva.link/pr0qxbi3c0y6ccg"
   },
   {
@@ -98,13 +119,19 @@ export const trainings: Training[] = [
   },
   {
     id: "mongo-db-security",
-    title: "Vulnerabilidades no MongoDB",
+    title: {
+      en: "MongoDB Vulnerabilities",
+      pt: "Vulnerabilidades no MongoDB"
+    },
     description: {
       en: "Analyzing security vulnerabilities and best practices in MongoDB.",
       pt: "Analisando vulnerabilidades de segurança e boas práticas no MongoDB."
     },
     imagePath: "/mongodb.png",
-    tags: ["Segurança", "NoSQL", "MongoDB"],
+    tags: {
+      en: ["Security", "NoSQL", "MongoDB"],
+      pt: ["Segurança", "NoSQL", "MongoDB"]
+    },
     canvaUrl: "https://canva.link/lwpzlyavx4lhca0"
   }
 ];

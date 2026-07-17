@@ -13,7 +13,7 @@ export function TrainingGrid() {
   const [viewMode, setViewMode] = React.useState<ViewMode>("grid")
 
   return (
-    <section id="trainings" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 w-full">
+    <section id="trainings" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
       <div className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary text-center md:text-left">
           {t("Trainings.title") || "Treinamentos & Apresentações"}
@@ -45,10 +45,10 @@ export function TrainingGrid() {
       </div>
 
       <div className={cn(
-        "gap-8",
+        "gap-8 w-full",
         viewMode === "grid" && "grid sm:grid-cols-2 lg:grid-cols-3",
         viewMode === "list" && "flex flex-col",
-        viewMode === "carousel" && "flex overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-accent-cyan scrollbar-track-transparent items-stretch"
+        viewMode === "carousel" && "flex overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-accent-cyan scrollbar-track-transparent items-stretch after:content-[''] after:shrink-0 after:w-px"
       )}>
         {trainings.map((training) => (
           <div 

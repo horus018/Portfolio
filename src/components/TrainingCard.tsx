@@ -15,6 +15,8 @@ interface TrainingCardProps {
 export function TrainingCard({ training, isList = false }: TrainingCardProps) {
   const { t, language } = useLanguage()
   const description = training.description[language]
+  const title = typeof training.title === 'string' ? training.title : training.title[language]
+  const tags = Array.isArray(training.tags) ? training.tags : training.tags[language]
 
   return (
     <div className={cn(
@@ -27,7 +29,7 @@ export function TrainingCard({ training, isList = false }: TrainingCardProps) {
       )}>
         <Image
           src={training.imagePath}
-          alt={training.title}
+          alt={typeof training.title === 'string' ? training.title : training.title.en}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -35,11 +37,11 @@ export function TrainingCard({ training, isList = false }: TrainingCardProps) {
       </div>
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex flex-col items-start gap-3">
-          <GlitchText>
-            <h3 className="text-xl font-bold text-text-primary">{training.title}</h3>
+          <GlitchText randomGlitch>
+            <h3 className="text-xl font-bold text-text-primary">{title}</h3>
           </GlitchText>
           <div className="flex flex-wrap gap-2">
-            {training.tags.map((tag) => (
+            {tags.map((tag) => (
               <span 
                 key={tag} 
                 className={cn("rounded px-2 py-0.5 text-xs font-medium", getBadgeColor(tag))}
@@ -56,10 +58,10 @@ export function TrainingCard({ training, isList = false }: TrainingCardProps) {
           href={training.canvaUrl} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 font-mono text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan"
+          className="inline-flex items-center gap-2 font-mono text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan leading-none"
         >
-          <Presentation className="h-4 w-4" />
-          {t("Trainings.view") || "View Presentation"}
+          <Presentation className="h-4 w-4 shrink-0 mb-[1px]" />
+          <span className="mt-[1px]">{t("Trainings.view") || "View Presentation"}</span>
         </a>
       </div>
     </div>
