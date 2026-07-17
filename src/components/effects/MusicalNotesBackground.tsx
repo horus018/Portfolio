@@ -68,7 +68,7 @@ export function MusicalNotesBackground() {
 
   return (
     <>
-      <div className="fixed inset-0 pointer-events-none z-0 hidden lg:block overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none z-[-1] hidden lg:block overflow-hidden">
         {notes.map((note) => (
           <div
             key={note.id}
